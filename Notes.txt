@@ -1,0 +1,26 @@
+What info do we want to include?
+
+- Only (4) major leagues
+- Discussions/Forums?
+- Matches (upcoming, recent)
+- Player statistics
+- Team statistics 
+
+Step by step project process
+
+1) Learn the tools that are needed
+    - python
+    - flask
+    - github (file structure)
+    - html/css (frontend web development)
+
+2) Get the data
+    - use an API to get data straight from valorant
+
+3) Process and store data
+    - How will the data come in?
+    - Store this data in a database
+    - Organize data to make it easy to display
+
+4) Display the data
+
