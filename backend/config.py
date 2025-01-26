@@ -1,0 +1,1 @@
+# This holds configuration data such as API keys and database details.
