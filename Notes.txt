@@ -12,7 +12,7 @@ Step by step project process
     - python
     - flask
     - github (file structure)
-    - html/css (frontend web development)
+    - html/css/js (frontend web development)
 
 2) Get the data
     - use an API to get data straight from valorant
