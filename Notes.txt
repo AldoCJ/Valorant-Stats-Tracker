@@ -14,13 +14,16 @@ Step by step project process
     - github (file structure)
     - html/css/js (frontend web development)
 
-2) Get the data
+2) Set up the database
+    - learn mySQL
+
+3) Get the data
     - use an API to get data straight from valorant
 
-3) Process and store data
+4) Process and store data
     - How will the data come in?
     - Store this data in a database
     - Organize data to make it easy to display
 
-4) Display the data
+5) Display the data
 
