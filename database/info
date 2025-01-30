@@ -1,0 +1,24 @@
+Tables
+Players (
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique ID for each player
+    player VARCHAR(50) NOT NULL,        -- Player name (e.g., "bones")
+    org VARCHAR(50),                    -- Organization (e.g., "Land")
+    rounds_played INT,                  -- Rounds played (e.g., 276)
+    rating DECIMAL(5, 2),               -- Rating (e.g., 1.23)
+    average_combat_score DECIMAL(5, 1), -- Average combat score (e.g., 263.9)
+    kill_deaths DECIMAL(5, 2),          -- Kill/Death ratio (e.g., 1.36)
+    kill_assists_survived_traded VARCHAR(10), -- KAST percentage (e.g., "76%")
+    average_damage_per_round DECIMAL(5, 1),   -- Average damage per round (e.g., 168.5)
+    kills_per_round DECIMAL(3, 2),      -- Kills per round (e.g., 0.94)
+    assists_per_round DECIMAL(3, 2),    -- Assists per round (e.g., 0.19)
+    first_kills_per_round DECIMAL(3, 2), -- First kills per round (e.g., 0.19)
+    first_deaths_per_round DECIMAL(3, 2), -- First deaths per round (e.g., 0.17)
+    headshot_percentage VARCHAR(10),    -- Headshot percentage (e.g., "23%")
+    clutch_success_percentage VARCHAR(10), -- Clutch success percentage (e.g., "24%")
+    UNIQUE (player)
+);
+
+Agents (
+    agent_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique numeric ID for each agent
+    agent_name VARCHAR(50) NOT NULL UNIQUE    -- Agent name (e.g., "raze", "jett")
+);
