@@ -1,6 +1,10 @@
 What info do we want to include?
 
-- Only (4) major leagues
+- Only (4) major leagues - 12 teams per league
+    * Americas
+    * EMEA (Europe, Middle East, Africa)
+    * Pacific
+    * China
 - Discussions/Forums?
 - Matches (upcoming, recent)
 - Player statistics
@@ -26,4 +30,13 @@ Step by step project process
     - Organize data to make it easy to display
 
 5) Display the data
+
+
+-- Entities --
+
+Players
+Teams
+Matches
+Events?
+
 

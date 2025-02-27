@@ -7,3 +7,7 @@ __pycache__/
 *.log
 .DS_Store
 Thumbs.db
+.vscode/settings.json
+match_data.json
+player_data.json
+team_data.json
