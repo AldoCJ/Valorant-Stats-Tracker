@@ -4,8 +4,8 @@
 import requests
 import json
 
-def retreive_players(region):
-    url = f"https://vlrggapi.vercel.app/stats?region={region}&timespan=30"
+def retrieve_players(region):
+    url = f"https://vlrggapi.vercel.app/stats?region={region}&timespan=60"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -17,7 +17,8 @@ def retreive_players(region):
         print(f"Error: {response.status_code}")
         return False
     
-def retreive_matches(parameter):
+def retrieve_matches(parameter):
+    
     url = f"https://vlrggapi.vercel.app/match?q={parameter}"
     response = requests.get(url)
     if response.status_code == 200:
@@ -44,4 +45,5 @@ def retrieve_teams(region):
         return False
     
 if __name__ == "__main__":
-    retreive_matches("upcoming")
+    
+    retrieve_players("na")

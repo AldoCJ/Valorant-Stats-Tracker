@@ -4,22 +4,27 @@ from fetch_data import *
 from database_upload import *
 
 def update_players():
-    regions = ["na", "eu", "ap", "sa"]
+    regions = ["na", "eu", "ap", "cn", "kr", "jp", "br", "la"]
 
     for region in regions:
-        if retreive_players(region):
+        if retrieve_players(region):
             upload_players("player_data.json", region)
             print (f"{region} players uploaded to the database!")
         else:
             print(f"Failed to retrieve {region} players.")
 
 def update_matches():
-    parameters = ['upcoming', 'live_score', 'results']
-    for parameter in parameters:
-        if retreive_matches(parameter):
-            print (f"{parameter} matches uploaded to the database!")
-        else:
-            print(f"Failed to retrieve {parameter} matches.")
+    if retrieve_matches("upcoming"):
+        upload_upcoming_matches("match_data.json")
+        print (f"Upcoming matches uploaded to the database!")
+    else:
+        print(f"Failed to retrieve upcoming matches.")
+
+    if retrieve_matches("results"):
+        upload_upcoming_matches("match_data.json")
+        print (f"Results matches uploaded to the database!")
+    else:
+        print(f"Failed to retrieve results matches.")
 
 def update_teams():
     regions = ["na", "eu", "ap", "sa"]

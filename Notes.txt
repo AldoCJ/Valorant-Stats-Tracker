@@ -40,3 +40,14 @@ Matches
 Events?
 
 
+-- Things to do --
+
+1) Finish setting up the database
+    - Add any more tables/data that need to be tracked
+
+2) Filter out data that is not relevant
+    - This goes for players, teams, and matches that are not involved in the major 4 leagues
+
+3) Add the AI predictor feature for each match
+
+

@@ -53,6 +53,8 @@ Upcoming_Matches
     id INT AUTO_INCREMENT PRIMARY KEY,
     team1 VARCHAR(50) NOT NULL REFERENCES teams(team),
     team2 VARCHAR(50) NOT NULL REFERENCES teams(team), 
+    flag1 VARCHAR(100), 
+    flag2 VARCHAR(100), 
     series VARCHAR(150), 
     event VARCHAR(150),
     time DATETIME,
@@ -66,8 +68,72 @@ Recent_Matches
     team2 VARCHAR(50) NOT NULL REFERENCES teams(team), 
     score1 INT NOT NULL,
     score2 INT NOT NULL,
+    flag1 VARCHAR(100),
+    flag2 VARCHAR(100),
     series VARCHAR(150), 
     event VARCHAR(150),
     time DATETIME,
     page VARCHAR(150),
+    tournament_icon VARCHAR(150)
 )
+
+
+
+List of relevant teams:
+- EMEA
+    - Team Vitality
+    - Team Liquid
+    - Team Heretics
+    - FUT Esports
+    - Fnatic
+    - BBL Esports
+    - Gentle Mates
+    - Gaintx
+    - Movistar KOI
+    - Natus Vincere
+    - Karmine Corp
+    - Apeks
+
+- Pacific
+    - DRX
+    - T1
+    - Gen.G
+    - Talon
+    - Nongshim Redforce
+    - Detonation FocusMe
+    - Rex Regum Qeon
+    - Paper Rex
+    - BOOM Esports
+    - Team Secret
+    - Global Esports
+    - ZETA DIVISION
+
+- Americas
+    - G2 Esports
+    - Sentinels
+    - MIBR
+    - KRU Esports
+    - Leviatán
+    - LOUD
+    - Evil Geniuses
+    - NRG Esports
+    - FURIA
+    - Cloud9
+    - 100 Thieves
+    - 2Game Esports
+
+- China
+    - EDward Gaming
+    - Trace Esports
+    - Billibilli Gaming
+    - Dragon Ranger Gaming
+    - FunPlus Phoenix
+    - Xi Lai Gaming
+    - Nova Esports
+    - JD Mall JDG Esports
+    - Wolves Experts
+    - TYLOO
+    - Titan Esports Club
+    - All Gamers
+
+    

@@ -1,0 +1,104 @@
+# This is for the teams
+teams = {
+        "Team Vitality", done
+        "Team Liquid", done
+        "Team Heretics", done
+        "FUT Esports", done
+        "FNATIC", done
+        "BBL Esports", done
+        "Gentle Mates", done
+        "GIANTX", done 
+        "KOI", done
+        "Natus Vincere", done
+        "Karmine Corp", done
+        "Apeks", done
+        "DRX", done
+        "T1", done 
+        "Gen.G", done
+        "TALON", done
+        "Nongshim Redforce", done
+        "DetonatioN FocusMe", done
+        "Rex Regum Qeon", done
+        "Paper Rex", done
+        "BOOM Esports", done
+        "Team Secret", done
+        "Global Esports", done
+        "ZETA DIVISION", done
+        "G2 Esports", done
+        "Sentinels", done 
+        "MIBR", done
+        "KR\u00dc Esp", done 
+        "LEVIAT\u00c1N", done
+        "LOUD", done
+        "Evil Geniuses", done
+        "NRG Esports", done 
+        "FURIA", done
+        "Cloud9", done
+        "100 Thieves", done
+        "2Game Esports", done
+        "EDward Gaming", done
+        "Trace Esports", done
+        "Bilibili Gaming", done
+        "Dragon Ranger Gaming", done
+        "FunPlus Phoenix", done 
+        "Xi Lai Gaming", done
+        "Nova Esports", done
+        "JDG Esports", done
+        "Wolves Experts", done
+        "TYLOO", done
+        "Titan Esports Club", done
+        "All Gamers" done
+        }
+
+# This is for the players, still needs to be done
+
+teams2 = {
+        "Team Vitality",
+        "Team Liquid",
+        "Team Heretics",
+        "FUT Esports",
+        "Fnatic",
+        "BBL Esports",
+        "Gentle Mates",
+        "Gaintx",
+        "Movistar KOI",
+        "Natus Vincere",
+        "Karmine Corp",
+        "Apeks",
+        "DRX",
+        "T1",
+        "Gen.G",
+        "Talon",
+        "Nongshim Redforce",
+        "Detonation FocusMe",
+        "Rex Regum Qeon",
+        "Paper Rex",
+        "BOOM Esports",
+        "Team Secret",
+        "Global Esports",
+        "ZETA DIVISION",
+        "G2", done
+        "SEN", done
+        "MIBR", 
+        "KRU Esports",
+        "Leviatán",
+        "LOUD",
+        "Evil Geniuses",
+        "NRG Esports",
+        "FURIA",
+        "Cloud9",
+        "100 Thieves",
+        "2Game Esports",
+        "EDward Gaming",
+        "Trace Esports",
+        "Billibilli Gaming",
+        "Dragon Ranger Gaming",
+        "FunPlus Phoenix",
+        "Xi Lai Gaming",
+        "Nova Esports",
+        "JD Mall JDG Esports",
+        "Wolves Experts",
+        "TYLOO",
+        "Titan Esports Club",
+        "All Gamers"
+        }
