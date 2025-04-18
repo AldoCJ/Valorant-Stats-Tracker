@@ -21,7 +21,7 @@ def update_matches():
         print(f"Failed to retrieve upcoming matches.")
 
     if retrieve_matches("results"):
-        upload_upcoming_matches("match_data.json")
+        upload_match_results("match_data.json")
         print (f"Results matches uploaded to the database!")
     else:
         print(f"Failed to retrieve results matches.")
@@ -34,5 +34,10 @@ def update_teams():
             print (f"{region} teams uploaded to the database!")
         else:
             print(f"Failed to retrieve {region} teams.")    
+
+if __name__ == "__main__":
+    update_players()
+    update_teams()
+    update_matches()
 
 

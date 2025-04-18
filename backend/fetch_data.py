@@ -46,4 +46,4 @@ def retrieve_teams(region):
     
 if __name__ == "__main__":
     
-    retrieve_players("na")
+    retrieve_teams("na")

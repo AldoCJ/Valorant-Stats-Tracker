@@ -51,21 +51,24 @@ Teams
 Upcoming_Matches
 (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    team1 VARCHAR(50) NOT NULL REFERENCES teams(team),
-    team2 VARCHAR(50) NOT NULL REFERENCES teams(team), 
+    team1 VARCHAR(50) NOT NULL,
+    team2 VARCHAR(50) NOT NULL,
     flag1 VARCHAR(100), 
     flag2 VARCHAR(100), 
     series VARCHAR(150), 
     event VARCHAR(150),
     time DATETIME,
     page VARCHAR(150),
+    UNIQUE (team1, team2, time)
+    FOREIGN KEY (team1) REFERENCES teams(team),
+    FOREIGN KEY (team2) REFERENCES teams(team)
 );
 
 Recent_Matches
 (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    team1 VARCHAR(50) NOT NULL REFERENCES teams(team),
-    team2 VARCHAR(50) NOT NULL REFERENCES teams(team), 
+    team1 VARCHAR(50) NOT NULL,
+    team2 VARCHAR(50) NOT NULL, 
     score1 INT NOT NULL,
     score2 INT NOT NULL,
     flag1 VARCHAR(100),
@@ -74,8 +77,11 @@ Recent_Matches
     event VARCHAR(150),
     time DATETIME,
     page VARCHAR(150),
-    tournament_icon VARCHAR(150)
-)
+    tournament_icon VARCHAR(150),
+    UNIQUE (team1, team2, time),
+    FOREIGN KEY (team1) REFERENCES teams(team),
+    FOREIGN KEY (team2) REFERENCES teams(team)
+);
 
 
 
