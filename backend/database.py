@@ -4,7 +4,7 @@ from fetch_data import *
 from database_upload import *
 
 def update_players():
-    regions = ["na", "eu", "ap", "cn", "kr", "jp", "br", "la"]
+    regions = ["na", "eu", "ap", "br", "jp", "oce", "mn"]
 
     for region in regions:
         if retrieve_players(region):
@@ -27,7 +27,7 @@ def update_matches():
         print(f"Failed to retrieve results matches.")
 
 def update_teams():
-    regions = ["na", "eu", "ap", "sa"]
+    regions = ["na", "eu", "ap", "la", "la-s", "la-n", "oce", "kr", "mn", "br", "cn", "jp"]
     for region in regions:
         if retrieve_teams(region):
             upload_teams("team_data.json", region)
@@ -37,7 +37,7 @@ def update_teams():
 
 if __name__ == "__main__":
     update_players()
-    update_teams()
-    update_matches()
+    # update_teams()
+    # update_matches()
 
 

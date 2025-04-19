@@ -43,7 +43,7 @@ teams = {
         "T1",  
         "Gen.G", 
         "TALON", 
-        "Nongshim Redforce", 
+        "Nongshim RedForce", 
         "DetonatioN FocusMe", 
         "Rex Regum Qeon", 
         "Paper Rex", 
@@ -54,7 +54,7 @@ teams = {
         "G2 Esports", 
         "Sentinels",  
         "MIBR", 
-        "KR\u00dc Esp",  
+        "KRÜ Esports",  
         "LEVIAT\u00c1N", 
         "LOUD", 
         "Evil Geniuses", 
@@ -86,7 +86,7 @@ player_teams = {
         "BBL", 
         "M8", 
         "GX", 
-        "MKOI", 
+        "KOI", 
         "NAVI", 
         "KC", 
         "APK", 
@@ -161,6 +161,16 @@ def upload_players(filename, region):
             data = json.load(file)
             for player in data["data"]["segments"]:
                 if player["org"] in player_teams:
+                    for agent in player["agents"]:
+                        cursor.execute(
+                            """
+                            INSERT IGNORE INTO agents_played (player, agent_name)
+                            VALUES(%s, %s)
+                            """,
+                            (player["player"], agent)   
+                        )
+                    rating_str = player["rating"].strip()
+                    rating = float(rating_str) if rating_str else None
                     cursor.execute(
                             """
                             INSERT INTO players (player, org, rounds_played, rating, average_combat_score, kill_deaths, kill_assists_survived_traded,
@@ -183,11 +193,12 @@ def upload_players(filename, region):
                                 clutch_success_percentage = VALUES(clutch_success_percentage),
                                 region = VALUES(region)
                             """,
+                            
                             (
                                 player["player"], 
                                 player["org"], 
                                 int(player["rounds_played"]), 
-                                float(player["rating"]), 
+                                rating, 
                                 float(player["average_combat_score"]),
                                 float(player["kill_deaths"]),
                                 player["kill_assists_survived_traded"], 
@@ -201,7 +212,6 @@ def upload_players(filename, region):
                                 region
                             )
                     )
-            print ("data uploaded")
         conn.commit()
         cursor.close()
         conn.close()
