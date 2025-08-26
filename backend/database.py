@@ -1,10 +1,10 @@
-# Here we will define the structure of our database and the functions that interact with it.
+
 
 from fetch_data import *
 from database_upload import *
 
 def update_players():
-    regions = ["na", "eu", "ap", "br", "jp", "oce", "mn"]
+    regions = ["na", "eu", "ap", "br", "jp", "oce", "mn", "cn", "kr"]
 
     for region in regions:
         if retrieve_players(region):
@@ -37,7 +37,7 @@ def update_teams():
 
 if __name__ == "__main__":
     update_players()
-    # update_teams()
-    # update_matches()
+    update_teams()
+    update_matches()
 
 

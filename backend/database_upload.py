@@ -1,9 +1,10 @@
-import mysql.connector
 import json
-import os
-from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import re
+from teams import *
+from connection import *
+from match_predictor import *
+
 
 def get_event_time(time_str):
     """
@@ -24,135 +25,6 @@ def get_event_time(time_str):
     event_time = now - timedelta(hours=hours, minutes=minutes)
     return event_time
 
-
-
-teams = {
-        "Team Vitality", 
-        "Team Liquid", 
-        "Team Heretics", 
-        "FUT Esports", 
-        "FNATIC", 
-        "BBL Esports", 
-        "Gentle Mates", 
-        "GIANTX",  
-        "KOI", 
-        "Natus Vincere", 
-        "Karmine Corp", 
-        "Apeks", 
-        "DRX", 
-        "T1",  
-        "Gen.G", 
-        "TALON", 
-        "Nongshim RedForce", 
-        "DetonatioN FocusMe", 
-        "Rex Regum Qeon", 
-        "Paper Rex", 
-        "BOOM Esports", 
-        "Team Secret", 
-        "Global Esports", 
-        "ZETA DIVISION", 
-        "G2 Esports", 
-        "Sentinels",  
-        "MIBR", 
-        "KRÜ Esports",  
-        "LEVIAT\u00c1N", 
-        "LOUD", 
-        "Evil Geniuses", 
-        "NRG Esports",  
-        "FURIA", 
-        "Cloud9", 
-        "100 Thieves", 
-        "2Game Esports", 
-        "EDward Gaming", 
-        "Trace Esports", 
-        "Bilibili Gaming", 
-        "Dragon Ranger Gaming", 
-        "FunPlus Phoenix",  
-        "Xi Lai Gaming", 
-        "Nova Esports", 
-        "JDG Esports", 
-        "Wolves Esports", 
-        "TYLOO", 
-        "Titan Esports Club", 
-        "All Gamers" 
-        }
-
-player_teams = {
-        "VIT", 
-        "TL",  
-        "TH", 
-        "FUT", 
-        "FNC", 
-        "BBL", 
-        "M8", 
-        "GX", 
-        "KOI", 
-        "NAVI", 
-        "KC", 
-        "APK", 
-        "DRX", 
-        "T1", 
-        "GEN", 
-        "TLN", 
-        "NS", 
-        "DFM", 
-        "RRQ", 
-        "PRX", 
-        "BME", 
-        "TS", 
-        "GE", 
-        "ZETA", 
-        "G2", 
-        "SEN", 
-        "MIBR", 
-        "KRÜ", 
-        "LEV", 
-        "LOUD", 
-        "EG", 
-        "NRG", 
-        "FUR", 
-        "C9", 
-        "100T", 
-        "2G", 
-        "EDG", 
-        "TE", 
-        "BLG", 
-        "DRG", 
-        "FPX", 
-        "XLG", 
-        "NOVA", 
-        "JDG", 
-        "WOL", 
-        "TYL", 
-        "TEC", 
-        "AG" 
-        }
-
-# Load environment variables
-load_dotenv()
-
-# Get database credentials from .env file
-DB_HOST = os.getenv("HOST", "metro.proxy.rlwy.net")
-DB_USER = os.getenv("USER", "root")
-DB_PASSWORD = os.getenv("PASSWORD", "")
-DB_NAME = os.getenv("NAME", "railway")
-DB_PORT = os.getenv("PORT", "45442")
-
-def create_connection():
-    try:
-        connection = mysql.connector.connect(
-            host=DB_HOST,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            database=DB_NAME,
-            port=DB_PORT
-        )
-        print("Database connection successful!")
-        return connection
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        return None
-    
 def upload_players(filename, region):
     conn = create_connection()
     if conn:
@@ -224,19 +96,17 @@ def upload_upcoming_matches(filename):
             data = json.load(file)
             for match in data["data"]["segments"]:
                 if "Champions Tour" in match["match_event"]: 
+                    prediction_data = extract_prediction_data(match)
+                    if prediction_data:
+                        team1_pred, team2_pred = predict_winner(prediction_data)
+                    else:
+                        team1_pred = None
+                        team2_pred = None
                     cursor.execute(
                             """
-                            INSERT IGNORE INTO upcoming_matches (team1, team2, flag1, flag2, series, event, time, page)
-                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-                            ON DUPLICATE KEY UPDATE
-                                team1 = VALUES(team1),
-                                team2 = VALUES(team2),
-                                flag1 = VALUES(flag1),
-                                flag2 = VALUES(flag2),
-                                series = VALUES(series),
-                                event = VALUES(event),
-                                time = VALUES(time),
-                                page = VALUES(page)
+                            INSERT IGNORE INTO upcoming_matches (team1, team2, flag1, flag2, series, event, time, page,
+                             team1_pred, team2_pred)
+                            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                             """,
                             (
                                 match["team1"], 
@@ -246,7 +116,9 @@ def upload_upcoming_matches(filename):
                                 match["match_series"], 
                                 match["match_event"], 
                                 match["unix_timestamp"], 
-                                match["match_page"]
+                                match["match_page"],
+                                team1_pred,
+                                team2_pred
                             )
                         )
             cursor.execute(
@@ -269,10 +141,11 @@ def upload_match_results(filename):
             data = json.load(file)
             for match in data["data"]["segments"]:
                 if "Champions Tour" in match["tournament_name"]: 
+                    page = "https://www.vlr.gg" + match["match_page"]
                     cursor.execute(
                             """
                             INSERT IGNORE INTO recent_matches 
-                            (team1, team2, score1, score2, flag1, flag2, round, tournament, time, page, tournament_icon)
+                            (team1, team2, score1, score2, flag1, flag2, series, event, time, page, tournament_icon)
                             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                             """,
                             (
@@ -285,7 +158,7 @@ def upload_match_results(filename):
                                 match["round_info"],
                                 match["tournament_name"],
                                 get_event_time(match["time_completed"]), 
-                                match["match_page"],
+                                page,
                                 match["tournament_icon"]
                             )
                     )

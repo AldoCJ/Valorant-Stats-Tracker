@@ -44,6 +44,3 @@ def retrieve_teams(region):
         print(f"Error: {response.status_code}")
         return False
     
-if __name__ == "__main__":
-    
-    retrieve_teams("kr")

@@ -59,12 +59,14 @@ Upcoming_Matches
     event VARCHAR(150),
     time DATETIME,
     page VARCHAR(150),
+    team1_pred INT,
+    team2_pred INT,
     UNIQUE (team1, team2, time)
     FOREIGN KEY (team1) REFERENCES teams(team),
     FOREIGN KEY (team2) REFERENCES teams(team)
 );
 
-Recent_Matches
+recent_matches
 (
     id INT AUTO_INCREMENT PRIMARY KEY,
     team1 VARCHAR(50) NOT NULL,
@@ -76,12 +78,13 @@ Recent_Matches
     series VARCHAR(150), 
     event VARCHAR(150),
     time DATETIME,
-    page VARCHAR(150),
+    page VARCHAR(200),
     tournament_icon VARCHAR(150),
-    UNIQUE (team1, team2, time),
+    UNIQUE (page),
     FOREIGN KEY (team1) REFERENCES teams(team),
     FOREIGN KEY (team2) REFERENCES teams(team)
 );
+
 
 
 
